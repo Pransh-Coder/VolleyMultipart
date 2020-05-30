@@ -130,7 +130,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void UploadImage(final Bitmap bitmap) {
         //text=entertext.getText().toString().trim();
-        VolleyMultipartRequest multipartRequest = new VolleyMultipartRequest(Request.Method.POST, "https://damp-wave-49064.herokuapp.com/home/10/", new Response.Listener<NetworkResponse>() {      //https://dry-chamber-48445.herokuapp.com/post
+        VolleyMultipartRequest multipartRequest = new VolleyMultipartRequest(Request.Method.POST, "http://paytmpay001.dx.am/api/raeces/uploadPdf.php", new Response.Listener<NetworkResponse>() {      //https://dry-chamber-48445.herokuapp.com/post
             @Override
             public void onResponse(NetworkResponse response) {
                 Log.e("UploadImage", new String(response.data));
@@ -144,6 +144,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onErrorResponse(VolleyError error) {
                 Toast.makeText(MainActivity.this,"error: "+error,Toast.LENGTH_SHORT).show();
+                Log.e("error","error: "+error);
             }
         }) {
 
@@ -156,7 +157,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();
-                //params.put("text",text);
+                long imagename = System.currentTimeMillis();
+                params.put("name",imagename + ".png");
                 return params;
             }
 
@@ -167,7 +169,7 @@ public class MainActivity extends AppCompatActivity {
             protected Map<String, DataPart> getByteData() {
                 Map<String, DataPart> params = new HashMap<>();
                 long imagename = System.currentTimeMillis();
-                params.put("file", new DataPart(imagename + ".png", getFileDataFromDrawable(bitmap)));      //our key is "file"
+                params.put("pdf", new DataPart(imagename + ".png", getFileDataFromDrawable(bitmap)));      //our key is "file"
                 //System.out.println(getFileDataFromDrawable(bitmap).toString());
                 //Toast.makeText(MainActivity.this,""+getFileDataFromDrawable(bitmap).toString(),Toast.LENGTH_SHORT).show();
                 return params;

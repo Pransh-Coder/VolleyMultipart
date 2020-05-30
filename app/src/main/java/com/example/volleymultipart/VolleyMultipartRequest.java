@@ -1,5 +1,8 @@
 package com.example.volleymultipart;
 
+import android.app.DownloadManager;
+import android.net.Uri;
+
 import com.android.volley.AuthFailureError;
 import com.android.volley.NetworkResponse;
 import com.android.volley.ParseError;
@@ -14,10 +17,6 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.Map;
-
-/**
- * Created by Belal on 10/24/2017.
- */
 
 public class VolleyMultipartRequest extends Request<NetworkResponse> {
 
@@ -40,6 +39,7 @@ public class VolleyMultipartRequest extends Request<NetworkResponse> {
 
     @Override
     public Map<String, String> getHeaders() throws AuthFailureError {
+
         return (mHeaders != null) ? mHeaders : super.getHeaders();
     }
 
@@ -82,7 +82,7 @@ public class VolleyMultipartRequest extends Request<NetworkResponse> {
      * @return Map data part label with data byte
      * @throws AuthFailureError
      */
-    protected Map<String, DataPart> getByteData() throws AuthFailureError {
+    protected Map<String, DataPart> getByteData() throws AuthFailureError, IOException {
         return null;
     }
 
